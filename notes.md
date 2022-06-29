@@ -60,3 +60,9 @@ describe('My First Test', () => {
 - Open `cypress/screenshots/spec.cy.js/My First Test -- Does not do much! (failed).png` from the file explorer. Notice the failure in the image.
 - Open `cypress/videos/spec.cy.js.mp4` from the file explorer (not from VS Code). Watch the test run and fail in the video.
 9. Update `cypress/spec.cy.js` to pass. Run `npm test` to confirm.
+10. Update `.gitignore` to include the following
+```bash
+# Cypress
+cypress/screenshots
+cypress/videos
+```
