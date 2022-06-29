@@ -29,3 +29,34 @@ module.exports = defineConfig({
   }
 });
 ```
+4. Run `npm test`. There should be a warning that there are no tests.
+5. Create `cypress/e2e/spec.cy.js` with the following
+```js
+//from https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test#Write-your-first-test
+describe('My First Test', () => {
+  it('Does not do much!', () => {
+    expect(true).to.equal(true);
+  });
+});
+```
+6. Run `npm test`. The test should pass.
+7. Run `npm run test:open` to interactively run tests
+- Select your browser
+- Click `Start E2E Testing in browser`
+- Click on `spec.cy.js`
+- With the browser open, go to VS Code and update `cypress/e2e/spec.cy.js`:
+```js
+//from https://docs.cypress.io/guides/end-to-end-testing/writing-your-first-end-to-end-test#Write-your-first-test
+describe('My First Test', () => {
+  it('Does not do much!', () => {
+    expect(true).to.equal(false);
+  });
+});
+```
+- Go back to the browser window. The test reran itself and failed.
+- Close the browser window
+- Close the Cypress window
+8. Run `npm test`. The test should fail.
+- Open `cypress/screenshots/spec.cy.js/My First Test -- Does not do much! (failed).png` from the file explorer. Notice the failure in the image.
+- Open `cypress/videos/spec.cy.js.mp4` from the file explorer (not from VS Code). Watch the test run and fail in the video.
+9. Update `cypress/spec.cy.js` to pass. Run `npm test` to confirm.
