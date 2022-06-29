@@ -18,3 +18,14 @@ npm install cypress
   "test:open": "cypress open"
 }
 ```
+3. Create `cypress.config.js` with the following
+```js
+//from https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Step-3-Configure-Cypress
+const { defineConfig } = require('cypress');
+
+module.exports = defineConfig({
+  e2e: {
+    baseUrl: 'http://localhost:8080'
+  }
+});
+```
