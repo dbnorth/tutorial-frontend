@@ -6,7 +6,9 @@
     "serve": "vite preview --port 8081",
     "build": "vite build",
     "lint": "vue-cli-service lint",
-    "dev": "vite --port 3001"
+    "dev": "vite --port 3001",
+    "test": "cypress run",
+    "test:open": "cypress open"
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
