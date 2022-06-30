@@ -66,3 +66,16 @@ describe('My First Test', () => {
 cypress/screenshots
 cypress/videos
 ```
+
+## Set up end-to-end tests
+1. Start your backend, frontend, and database
+2. Create `cypress/e2e/tutorial_list_spec.cy.js` with the following
+```js
+describe('tutorial list', () => {
+  it('can load the page', () => {
+    cy.visit('/');
+    cy.contains('Tutorial List');
+  });
+});
+```
+3. Run `npm run test:open` and select `tutorial_list_spec.cy.js`. The test should pass.
