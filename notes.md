@@ -138,3 +138,32 @@ describe('tutorials', () => {
   });
 });
 ```
+7. Add the following test to `cypress/e2e/tutorials_spec.js`
+```js
+describe('tutorials', () => {
+  // ...
+
+  describe('add tutorial', () => {
+    // ...
+
+    it('can delete an added tutorial', () => {
+      var rowCount;
+      cy.intercept('GET', '/api/tutorials').as('getTutorials');
+      cy.visit('/');
+      cy.wait('@getTutorials');
+      cy.get('.v-row')
+        .then((rows) => {
+          cy.log('beginning row count is '  + rows.length)
+          rowCount = rows.length;
+        });
+      cy.get('.mdi-trash-can')
+        .first().click();
+      cy.get('.v-row')
+        .then((rows) => {
+          cy.wrap(rows).should('have.length', rowCount - 1);
+        });
+    });
+  });
+});
+```
+8. Verify that all tests have passed by using `npm test:open` or `npm test`

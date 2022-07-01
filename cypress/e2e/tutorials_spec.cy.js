@@ -37,5 +37,23 @@ describe('tutorials', () => {
       cy.contains('Tutorial List');
       cy.contains('Automated Testing Tutorial ' + uniqueId);
     });
+
+    it('can delete an added tutorial', () => {
+      var rowCount;
+      cy.intercept('GET', '/api/tutorials').as('getTutorials');
+      cy.visit('/');
+      cy.wait('@getTutorials');
+      cy.get('.v-row')
+        .then((rows) => {
+          cy.log('beginning row count is '  + rows.length)
+          rowCount = rows.length;
+        });
+      cy.get('.mdi-trash-can')
+        .first().click();
+      cy.get('.v-row')
+        .then((rows) => {
+          cy.wrap(rows).should('have.length', rowCount - 1);
+        });
+    });
   });
 });
