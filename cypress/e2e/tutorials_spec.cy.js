@@ -24,5 +24,18 @@ describe('tutorials', () => {
       cy.contains('Save').click();
       cy.contains('Content can not be empty!');
     });
+
+    it('can add a tutorial', () => {
+      const uniqueId = new Date().getTime();
+      cy.visit('/add');
+      cy.vueField('Title')
+        .type('Automated Testing Tutorial ' + uniqueId);
+      cy.vueField('Description')
+        .type('A really cool tutorial');
+      cy.contains('Save').click();
+
+      cy.contains('Tutorial List');
+      cy.contains('Automated Testing Tutorial ' + uniqueId);
+    });
   });
 });

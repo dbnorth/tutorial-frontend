@@ -23,3 +23,9 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('vueField', (fieldLabel) => {
+  return cy.contains(fieldLabel)
+    .siblings()
+    .find('input');
+});

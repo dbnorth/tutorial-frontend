@@ -79,13 +79,10 @@ describe('tutorials', () => {
 });
 ```
 3. Run `npm run test:open` and select `tutorials_spec.cy.js`. The test should pass.
-4. Keeping the browser window open, continue adding tests to `cypress/e2e/tutorials_spec.cy.js`
+4. Keeping the browser window open to see live test results, continue adding tests to `cypress/e2e/tutorials_spec.cy.js`
 ```js
 describe('tutorials', () => {
-  it('can load the list page', () => {
-    cy.visit('/');
-    cy.contains('Tutorial List');
-  });
+  // ...
 
   it('can visit the add tutorial page', () => {
     cy.visit('/');
@@ -106,6 +103,37 @@ describe('tutorials', () => {
       cy.visit('/add');
       cy.contains('Save').click();
       cy.contains('Content can not be empty!');
+    });
+  });
+});
+```
+5. Add the following to `cypress/support/commands.js`
+```js
+Cypress.Commands.add('vueField', (fieldLabel) => {
+  return cy.contains(fieldLabel)
+    .siblings()
+    .find('input');
+});
+```
+6. Add the following test to `cypress/e2e/tutorials_spec.js`. The test should pass.
+```js
+describe('tutorials', () => {
+  //...
+
+  describe('add tutorial', () => {
+    //...
+
+    it('can add a tutorial', () => {
+      const uniqueId = new Date().getTime();
+      cy.visit('/add');
+      cy.vueField('Title')
+        .type('Automated Testing Tutorial ' + uniqueId);
+      cy.vueField('Description')
+        .type('A really cool tutorial');
+      cy.contains('Save').click();
+
+      cy.contains('Tutorial List');
+      cy.contains('Automated Testing Tutorial ' + uniqueId);
     });
   });
 });
