@@ -69,13 +69,44 @@ cypress/videos
 
 ## Set up end-to-end tests
 1. Start your backend, frontend, and database
-2. Create `cypress/e2e/tutorial_list_spec.cy.js` with the following
+2. Create `cypress/e2e/tutorials_spec.cy.js` with the following
 ```js
-describe('tutorial list', () => {
-  it('can load the page', () => {
+describe('tutorials', () => {
+  it('can load the list page', () => {
     cy.visit('/');
     cy.contains('Tutorial List');
   });
 });
 ```
-3. Run `npm run test:open` and select `tutorial_list_spec.cy.js`. The test should pass.
+3. Run `npm run test:open` and select `tutorials_spec.cy.js`. The test should pass.
+4. Keeping the browser window open, continue adding tests to `cypress/e2e/tutorials_spec.cy.js`
+```js
+describe('tutorials', () => {
+  it('can load the list page', () => {
+    cy.visit('/');
+    cy.contains('Tutorial List');
+  });
+
+  it('can visit the add tutorial page', () => {
+    cy.visit('/');
+    cy.contains('Add')
+      .click();
+    cy.url()
+      .should('include', 'add');
+    cy.contains('Tutorial Add');
+  });
+
+  describe('add tutorial', () => {
+    it('can load the add page', () => {
+      cy.visit('/add');
+      cy.contains('Tutorial Add');
+    });
+
+    it('does not add when fields are empty', () => {
+      cy.visit('/add');
+      cy.contains('Save').click();
+      cy.contains('Content can not be empty!');
+    });
+  });
+});
+```
