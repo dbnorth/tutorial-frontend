@@ -166,4 +166,10 @@ describe('tutorials', () => {
   });
 });
 ```
-8. Verify that all tests have passed by using `npm test:open` or `npm test`
+8. Verify that all tests have passed by using `npm test:open` or `npm test`.
+9. With the documentation below and the examples so far write additional tests for viewing and editing tutorials. All tests should pass when you are complete.
+
+# Documentation
+- [Cypress Examples](https://example.cypress.io/)
+- [Cypress Debugging](https://docs.cypress.io/guides/guides/debugging)
+- [Cypress Network Requests](https://docs.cypress.io/guides/guides/network-requests)
